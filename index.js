@@ -1,13 +1,15 @@
 // index.js
-console.log('hello world')
+const express = require('express')
+const router = express.Router();
+const path = require('path')
+const url = require("url")
+const cors = require("cors");
 
-const http = require('http')
+const port = 8080
 
-const requestListenet = (req, res) => {
-    // console.log(req)
-    res.writeHead(415);
-    res.end('Hello, World!');
-}
+const app = express();
 
-const server = http.createServer(requestListenet)
-server.listen(8080);
+// to allow browsing to static pages
+app.use(express.static(path.join(__dirname, '/')))
+
+app.listen(port, () => console.log(`Listening to port ${port}`))
