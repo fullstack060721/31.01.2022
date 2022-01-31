@@ -8,8 +8,25 @@ const cors = require("cors");
 const port = 8080
 
 const app = express();
-
-// to allow browsing to static pages
 app.use(express.static(path.join(__dirname, '/')))
+// localhost:8080/page1.html
+
+app.get('/', (req, resp) => 
+{
+    resp.writeHead(200);
+    resp.end('this page will be sent on default url')
+})
+app.get('/fruit', (req, resp) => 
+{
+    resp.writeHead(201);
+    resp.end('banana is my favorite fruit')
+})
+
+app.get('/p1', (req, resp) => 
+{
+    resp.sendFile(path.join(__dirname + '/page1.html'));
+});
+
+// map /random ==> return a random number 
 
 app.listen(port, () => console.log(`Listening to port ${port}`))
