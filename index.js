@@ -11,7 +11,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, '/')))
 // localhost:8080/page1.html
 
-app.get('/', (req, resp) => 
+app.get('/page', (req, resp) => 
 {
     resp.writeHead(200);
     resp.end('this page will be sent on default url')
@@ -19,7 +19,7 @@ app.get('/', (req, resp) =>
 app.get('/fruit', (req, resp) => 
 {
     resp.writeHead(201);
-    resp.end('banana is my favorite fruit')
+    resp.end('{ id: 1, "name": "banana"}')
 })
 
 app.get('/p1', (req, resp) => 
