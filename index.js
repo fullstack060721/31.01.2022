@@ -52,4 +52,16 @@ app.get('/add', (req, resp) => {
     resp.end(`${a} + ${b} = ${sum}`)
 })
 
+app.get('/customer/:cust_id', (req, resp) => 
+{
+    resp.writeHead(200);
+    resp.end(`you sent ${req.params.cust_id}`)
+})
+
 app.listen(port, () => console.log(`Listening to port ${port}`))
+// printsign ? a=5 & b = 8 
+// 5 < 8
+// printsign ? a=15 & b = 8 
+// 15 > 8
+// printsign ? a=15 & b = 15
+// 15 == 15
