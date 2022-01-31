@@ -1,13 +1,29 @@
-// index.js
-console.log('hello world')
+// app.js
+// using the sqlite3 lib
+const sqlite3 = require('sqlite3').verbose();
 
-const http = require('http')
+// connecting to the db
+let db = new sqlite3.Database('31_01_2022.db', (err) => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log('Connected to the first database.');
+  });
 
-const requestListenet = (req, res) => {
-    // console.log(req)
-    res.writeHead(415);
-    res.end('Hello, World!');
-}
+// fire select query
+db.serialize(() => {
+    db.each(`SELECT * FROM COMPANY`, (err, row) => {
+      if (err) {
+        console.error(err.message);
+      }
+      console.table(row);
+    });
+  });  
 
-const server = http.createServer(requestListenet)
-server.listen(8080);
+// close connector
+db.close((err) => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log('Close the database connection.');
+  });  
